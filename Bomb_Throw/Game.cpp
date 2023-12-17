@@ -11,11 +11,12 @@ Game::Game() : m_window("Bomb Throw", sf::Vector2u(1600, 800))
 	sf::Vector2u l_size = m_shipTexture.getSize();
 	m_ship.setPosition(800, 400);
 	m_ship.setOrigin(l_size.x / 2, l_size.y / 2);
-	m_increment_s = sf::Vector2i(500, 500);
+	m_increment_s = sf::Vector2i(300, 300);
 	
-	m_ball.setRadius(50);
+	m_ball.setRadius(20);
 	m_ball.setFillColor(sf::Color::Black);
-	m_increment_b = sf::Vector2i(200, 200);
+	m_ball.setPosition(m_ship.getPosition().x, m_ship.getPosition().y);
+	m_increment_b = sf::Vector2i(800, 800);
 }
 
 Game::~Game() { }
@@ -32,19 +33,16 @@ void Game::HandleInput()
 void Game::Update()
 {
 	m_window.Update();
-	MoveShip();
 	Fire();
+	MoveShip();
 }
 
 void Game::Fire()
 {
 	float fElapsed = m_elapsed.asSeconds();
 
-
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
 	{
-		m_ball.setPosition(m_ship.getPosition().x, m_ship.getPosition().y);
-
 		m_ball.setPosition(
 			m_ball.getPosition().x,
 			m_ball.getPosition().y - (m_increment_b.y * fElapsed));
@@ -63,6 +61,8 @@ void Game::MoveShip()
 		m_ship.setPosition(
 			m_ship.getPosition().x,
 			m_ship.getPosition().y - (m_increment_s.y * fElapsed));
+
+		m_ball.setPosition(m_ship.getPosition().x, m_ship.getPosition().y);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
@@ -70,6 +70,8 @@ void Game::MoveShip()
 		m_ship.setPosition(
 			m_ship.getPosition().x,
 			m_ship.getPosition().y + (m_increment_s.y * fElapsed));
+
+		m_ball.setPosition(m_ship.getPosition().x, m_ship.getPosition().y);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -77,6 +79,8 @@ void Game::MoveShip()
 		m_ship.setPosition(
 			m_ship.getPosition().x - (m_increment_s.x * fElapsed),
 			m_ship.getPosition().y);
+
+		m_ball.setPosition(m_ship.getPosition().x, m_ship.getPosition().y);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -84,6 +88,8 @@ void Game::MoveShip()
 		m_ship.setPosition(
 			m_ship.getPosition().x + (m_increment_s.x * fElapsed),
 			m_ship.getPosition().y);
+
+		m_ball.setPosition(m_ship.getPosition().x, m_ship.getPosition().y);
 	}
 
 }
