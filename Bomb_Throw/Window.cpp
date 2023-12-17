@@ -3,6 +3,11 @@
 Window::Window(const std::string& title, const sf::Vector2u& size) { Setup(title, size); }
 Window::~Window() { Destroy(); }
 
+const sf::RenderWindow& Window::GetRenderWindow() const
+{
+	return m_window;
+}
+
 void Window::Setup(const std::string title, const sf::Vector2u& size)
 {
 	m_windowTitle = title;

@@ -9,6 +9,8 @@ public:
 	Window(const std::string& title, const sf::Vector2u& size);
 	~Window();
 
+	const sf::RenderWindow& GetRenderWindow() const;
+
 	void BeginDraw();
 	void EndDraw();
 
