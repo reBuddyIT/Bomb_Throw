@@ -1,6 +1,7 @@
 #pragma once
 #include "Window.h"
-#include <iostream>
+#include "Ship.h"
+#include "World.h"
 
 class Game
 {
@@ -17,18 +18,21 @@ public:
 	sf::Time GetElapsed();
 	void RestartClock();
 private:
-	void MoveShip();
+	/*void MoveShip();
 	void MoveBall();
-	void Fire();
+	void Fire();*/
 
 	Window m_window;
 	sf::Clock m_clock;
-	sf::Time m_elapsed;
+	float m_elapsed;
+
+	World m_world;
+	Ship m_ship;
 
 	bool m_IsBallVisible;
 	sf::CircleShape m_ball;
-	sf::Vector2f m_increment_b;
-	sf::Texture m_shipTexture;
-	sf::Sprite m_ship;
+	//sf::Vector2f m_increment_b;
+	//sf::Texture m_shipTexture;
+	//sf::Sprite m_ship;
 	sf::Vector2f m_increment_s;
 };

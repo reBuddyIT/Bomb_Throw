@@ -2,6 +2,7 @@
 #include <string>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 class Window
 {
@@ -9,7 +10,7 @@ public:
 	Window(const std::string& title, const sf::Vector2u& size);
 	~Window();
 
-	const sf::RenderWindow& GetRenderWindow() const;
+	std::shared_ptr<sf::RenderWindow> GetRenderWindow() const;
 
 	void BeginDraw();
 	void EndDraw();
@@ -28,7 +29,7 @@ private:
 	void Create();
 	void Destroy();
 
-	sf::RenderWindow m_window;
+	std::shared_ptr<sf::RenderWindow> m_window;
 	sf::Vector2u m_windowSize;
 	std::string m_windowTitle;
 	bool m_isDone;

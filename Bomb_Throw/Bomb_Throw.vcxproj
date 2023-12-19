@@ -132,7 +132,9 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Cannon_ball.cpp" />
+    <ClCompile Include="Ship.cpp" />
     <ClCompile Include="Window.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -140,7 +142,9 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Cannon_ball.h" />
+    <ClInclude Include="Ship.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
