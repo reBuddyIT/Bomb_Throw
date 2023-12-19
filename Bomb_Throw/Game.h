@@ -2,6 +2,8 @@
 #include "Window.h"
 #include "Ship.h"
 #include "World.h"
+#include "CBall.h"
+#include "Textbox.h"
 
 class Game
 {
@@ -18,21 +20,13 @@ public:
 	sf::Time GetElapsed();
 	void RestartClock();
 private:
-	/*void MoveShip();
-	void MoveBall();
-	void Fire();*/
-
 	Window m_window;
 	sf::Clock m_clock;
 	float m_elapsed;
 
 	World m_world;
 	Ship m_ship;
-
-	bool m_IsBallVisible;
-	sf::CircleShape m_ball;
-	//sf::Vector2f m_increment_b;
-	//sf::Texture m_shipTexture;
-	//sf::Sprite m_ship;
-	sf::Vector2f m_increment_s;
+	CBall m_cball;
+	Textbox m_textbox1;
+	Textbox m_textbox2;
 };

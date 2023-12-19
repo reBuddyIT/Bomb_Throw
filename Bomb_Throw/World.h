@@ -12,7 +12,7 @@ public:
 
 	void RespawnAShip();
 
-	void Update(Ship& l_player);
+	void Update(Ship& l_ship, CBall& l_cball);
 	void Render(sf::RenderWindow& l_window);
 private:
 	sf::Vector2u m_windowSize;

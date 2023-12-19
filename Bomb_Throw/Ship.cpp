@@ -1,20 +1,17 @@
 #include "Ship.h"
 
-Ship::Ship()
+Ship::Ship(Textbox* l_log)
 {
-	m_shipTexture.loadFromFile("Ship.jpg");
+	m_log = l_log;
+
+	m_shipTexture.loadFromFile("Ship.png");
 	m_ship.setTexture(m_shipTexture);
+	m_ship.setScale(0.3, 0.3);
 	sf::Vector2u l_size = m_shipTexture.getSize();
 	m_ship.setPosition(800, 400);
 	m_ship.setOrigin(l_size.x / 2, l_size.y / 2);
-	m_ship.rotate(-90);
-	m_speed = 20;
-
-	m_IsCBallVisible = 0;
-	m_ball.setRadius(10);
-	m_ball.setFillColor(sf::Color::Black);
-	m_ball.setPosition(m_ship.getPosition());
-	m_speed_cb = sf::Vector2f(800, 800);
+	m_ship.setRotation(270);
+	m_speed = 10;
 
 	m_dir = Direction::None;
 	m_lost = false;
@@ -32,10 +29,21 @@ void Ship::SetPosition(sf::Vector2f pos_x)
 {
 	m_ship.setPosition(pos_x);
 }
-void Ship::IncreaseScore() { m_score += 1; }
+void Ship::IncreaseScore()
+{
+	m_score += 1;
+	m_log->Add("You destroyed a ship! Score: "
+		+ std::to_string((long long)m_score));
+}
 
 void Ship::Reset()
 {
+	m_ship.setPosition(800, 400);
+	sf::Vector2u l_size = m_shipTexture.getSize();
+	m_ship.setOrigin(l_size.x / 2, l_size.y / 2);
+	m_ship.setRotation(270);
+	
+
 	SetDirection(Direction::None); // Start off still.
 	m_score = 0;
 	m_lost = false;
@@ -69,52 +77,8 @@ void Ship::moveShip()
 		m_ship.setRotation(90);
 		m_ship.move({ 0,  (m_speed * fElapsed) });
 	}
-
-	//float fElapsed = 1; //m_elapsed.asSeconds();
-
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-	//{
-	//	m_ship.move({ 0,  -(m_speed.y * fElapsed) });
-	//	m_ship.setPosition(
-	//		m_ship.getPosition().x,
-	//		m_ship.getPosition().y - (m_speed.y * fElapsed));
-	//}
-
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-	//{
-	//	m_ship.setPosition(
-	//		m_ship.getPosition().x,
-	//		m_ship.getPosition().y + (m_speed.y * fElapsed));
-	//}
-
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-	//{
-	//	m_ship.setPosition(
-	//		m_ship.getPosition().x - (m_speed.x * fElapsed),
-	//		m_ship.getPosition().y);
-	//}
-
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	//{
-	//	m_ship.setPosition(
-	//		m_ship.getPosition().x + (m_speed.x * fElapsed),
-	//		m_ship.getPosition().y);
-	//}
 }
-//
-//void Rotate()
-//{
-//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-//	{
-//		m_ship.rotate(10);
-//	}
-//
-//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-//	{
-//		m_ship.rotate(-10);
-//	}
-//}
-//
+
 //void MoveCBall()
 //{
 //	float fElapsed = 1; //m_elapsed.asSeconds();
@@ -129,29 +93,33 @@ void Ship::moveShip()
 //			m_IsCBallVisible = 0;
 //		}
 //}
-//
-//void Fire()
+
+//void Fire(CBall& l_cball, Ship& l_ship)
 //{
 //	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 //	{
-//		m_IsCBallVisible = true;
+//		l_cball.setVisible(1);
 //
-//		m_ball.setPosition(m_ship.getPosition());
+//		l_cball.SetPosition(l_ship.GetPosition());
 //
 //		sf::Vector2f ball_trac =
 //			sf::Vector2f(sf::Mouse::getPosition(m_window.GetRenderWindow())) -
-//			m_ball.getPosition();
+//			l_cball.GetPosition();
 //
 //		float vec_len = sqrt(pow(ball_trac.x, 2) + pow(ball_trac.y, 2));
 //		ball_trac /= vec_len;
 //
-//		m_increment_b = ball_trac;
+//		if (l_cball.getVisible() == 1)
+//		{
+//			l_cball.MoveCBall();
+//		}
 //	}
 //}
 
 void Ship::shipUpdate()
 {
 	moveShip();
+	//Fire();
 }
 
 void Ship::Render(sf::RenderWindow& l_window)

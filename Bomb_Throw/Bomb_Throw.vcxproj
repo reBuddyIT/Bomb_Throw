@@ -131,8 +131,9 @@
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Cannon_ball.cpp" />
+    <ClCompile Include="CBall.cpp" />
     <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="Textbox.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -141,8 +142,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Cannon_ball.h" />
+    <ClInclude Include="CBall.h" />
     <ClInclude Include="Ship.h" />
+    <ClInclude Include="Textbox.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

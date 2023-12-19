@@ -1,12 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "CBall.h"
+#include "Textbox.h"
 
 enum class Direction {None, Up, Down, Left, Right };
 
 class Ship
 {
 public:
-	Ship();
+	Ship(Textbox* l_log);
 	~Ship();
 
 	// Helper methods.
@@ -25,9 +27,8 @@ public:
 	void Reset(); // Reset to starting position.
 
 	void moveShip(); // Movement method.
-	//void Rotate();
 	//void MoveCBall();
-	//void Fire();
+	//void Fire(CBall& l_cball, Ship& l_ship);
 	void shipUpdate(); // Update method.
 	void Render(sf::RenderWindow& l_window);
 private:
@@ -36,11 +37,10 @@ private:
 	bool m_lost; // Losing state.
 	Direction m_dir; // Current direction.
 
-	bool m_IsCBallVisible;
-	sf::CircleShape m_ball;
-	sf::Vector2f m_speed_cb;
-
+	
 	int m_speed; // Speed of the ship.
+	sf::Image m_shipImage;
 	sf::Texture m_shipTexture; // Shape used in rendering.
-	sf::Sprite m_ship; 
+	sf::Sprite m_ship;
+	Textbox* m_log;
 };

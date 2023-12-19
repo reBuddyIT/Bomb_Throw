@@ -1,8 +1,9 @@
 #include "World.h"
+#include <iostream>
 
 World::World(sf::Vector2u l_windSize)
 {
-	m_blockSize = 16;
+	m_blockSize = 8;
 
 	m_windowSize = l_windSize;
 	RespawnAShip();
@@ -13,9 +14,10 @@ World::World(sf::Vector2u l_windSize)
 	m_bground.setPosition(800, 400);
 	m_bground.setOrigin(l_size.x / 2, l_size.y / 2);
 
-	m_ashipTexture.loadFromFile("Ship.jpg");
+	m_ashipTexture.loadFromFile("AShip.png");
 	m_aship.setTexture(m_ashipTexture);
-	m_aship.rotate(90);
+	m_aship.setScale(0.25, 0.25);
+	m_aship.rotate(180);
 
 	for (int i = 0; i < 4; ++i)
 	{
@@ -55,23 +57,31 @@ void World::RespawnAShip()
 		m_pos_aship.y * m_blockSize);
 }
 
-void World::Update(Ship& l_player)
+void World::Update(Ship& l_ship, CBall& l_cball)
 {
-	if (l_player.GetPosition() == m_pos_aship)
+	if ((sqrt(pow(l_ship.GetPosition().x - m_aship.getPosition().x, 2) +
+		pow(l_ship.GetPosition().y - m_aship.getPosition().y, 2)))
+		<= 0.4 * (512 * 0.2 + 512 * 0.3) ||
+		((sqrt(pow(l_cball.GetPosition().x - m_aship.getPosition().x, 2) +
+			pow(l_cball.GetPosition().y - m_aship.getPosition().y, 2)))
+			<= 0.4 * (512 * 0.2 + 512 * 0.3)))
 	{
-		l_player.IncreaseScore();
+		l_cball.setVisible(0);
+		l_ship.IncreaseScore();
+		//std::cout << l_ship.GetScore();
 		RespawnAShip();
 	}
 
-	int gridSize_x = m_windowSize.x / m_blockSize;
-	int gridSize_y = m_windowSize.y / m_blockSize;
+	int gridSize_x = m_windowSize.x;
+	int gridSize_y = m_windowSize.y;
+	
 
-	if (l_player.GetPosition().x <= 0 ||
-		l_player.GetPosition().y <= 0 ||
-		l_player.GetPosition().x >= gridSize_x - 1 ||
-		l_player.GetPosition().y >= gridSize_y - 1)
+	if (l_ship.GetPosition().x <= 0 ||
+		l_ship.GetPosition().y <= 0 ||
+		l_ship.GetPosition().x >= gridSize_x - 1 ||
+		l_ship.GetPosition().y >= gridSize_y - 1)
 	{
-		l_player.Lose();
+		l_ship.Lose();
 	}
 }
 
