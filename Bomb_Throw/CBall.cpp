@@ -10,6 +10,8 @@ CBall::CBall(Textbox* l_log)
 
 	m_speed_cb = sf::Vector2f(800, 800);
 
+	//m_log->Setup(5, 24, 350, sf::Vector2f(400, 200));
+
 	m_angel = 45;
 	m_log->Add("Throwing angel: "
 		+ std::to_string((long long)m_angel));

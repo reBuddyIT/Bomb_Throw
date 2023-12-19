@@ -7,8 +7,7 @@ Game::Game()
 	RestartClock();
 	srand(time(NULL));
 
-	//m_textbox1.Setup(5, 14, 350, sf::Vector2f(225, 0));
-	m_textbox2.Setup(5, 14, 350, sf::Vector2f(800, 800));
+	m_textbox1.Setup(5, 14, 350, sf::Vector2f(225, 0));
 	m_elapsed = 0.0f;
 }
 
@@ -61,7 +60,7 @@ void Game::Update()
 		m_elapsed -= timestep;
 		if (m_ship.HasLost())
 		{
-			m_textbox1.Add("GAME OVER! Score: "
+			m_textbox2.Add("GAME OVER! Score: "
 				+ std::to_string((long long)m_ship.GetScore()));
 
 			m_ship.Reset();
