@@ -6,7 +6,6 @@ World::World(sf::Vector2u l_windSize)
 	m_blockSize = 8;
 
 	m_windowSize = l_windSize;
-	RespawnAShip();
 
 	m_bgroundTexture.loadFromFile("ocean.png");
 	m_bground.setTexture(m_bgroundTexture);
@@ -16,8 +15,11 @@ World::World(sf::Vector2u l_windSize)
 
 	m_ashipTexture.loadFromFile("AShip.png");
 	m_aship.setTexture(m_ashipTexture);
+	m_aship.setOrigin({ m_aship.getGlobalBounds().width / 2, m_aship.getGlobalBounds().height / 2 });
 	m_aship.setScale(0.25, 0.25);
 	m_aship.rotate(180);
+
+	RespawnAShip();
 
 	for (int i = 0; i < 4; ++i)
 	{
@@ -48,13 +50,20 @@ int World::GetBlockSize() { return m_blockSize; }
 
 void World::RespawnAShip()
 {
-	int maxX = (m_windowSize.x / m_blockSize) - 2;
+	float new_y = rand() % int(m_windowSize.y - m_aship.getGlobalBounds().height - m_blockSize) + m_blockSize / 2 + m_aship.getGlobalBounds().height / 2;
+	float new_x = rand() % int(m_windowSize.x - m_aship.getGlobalBounds().width - m_blockSize) + m_blockSize / 2 + m_aship.getGlobalBounds().width / 2;
+
+	std::cout << "POS: " << new_x << " " << new_y << std::endl;
+	std::cout << "SIZE: " << m_aship.getGlobalBounds().width / 2 << " " << m_aship.getGlobalBounds().height / 2 << std::endl;
+
+	m_aship.setPosition(new_x, new_y);
+	/*int maxX = (m_windowSize.x / m_blockSize) - 2;
 	int maxY = (m_windowSize.y / m_blockSize) - 2;
 	m_pos_aship = sf::Vector2f(
 		rand() % maxX + 1, rand() % maxY + 1);
 	m_aship.setPosition(
 		m_pos_aship.x * m_blockSize,
-		m_pos_aship.y * m_blockSize);
+		m_pos_aship.y * m_blockSize);*/
 }
 
 void World::Update(Ship& l_ship, CBall& l_cball)

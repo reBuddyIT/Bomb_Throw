@@ -10,6 +10,7 @@ public:
 
 	// Helper methods.
 	//int GetSpeed();
+	void setSpeed(sf::Vector2f speed);
 	bool getVisible();
 	void setVisible(bool visib);
 	sf::Vector2f GetPosition();
@@ -18,6 +19,7 @@ public:
 	//void Reset(); // Reset to starting position.
 
 	void MoveCBall();
+
 	void cballUpdate(); // Update method.
 	void Render(sf::RenderWindow& l_window);
 private:

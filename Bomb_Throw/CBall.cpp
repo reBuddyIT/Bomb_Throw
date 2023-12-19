@@ -25,6 +25,11 @@ CBall::CBall(Textbox* l_log)
 
 CBall::~CBall() {}
 
+void CBall::setSpeed(sf::Vector2f speed)
+{
+	m_speed_cb = speed;
+}
+
 bool CBall::getVisible() { return m_IsCBallVisible; }
 void CBall::setVisible(bool visib) { m_IsCBallVisible = visib; }
 
@@ -35,12 +40,11 @@ void CBall::SetPosition(sf::Vector2f pos_x)
 	m_cball.setPosition(pos_x);
 }
 
-
 void CBall::MoveCBall()
 {
 	if (m_IsCBallVisible)
 	{
-		m_cball.move(m_speed_cb * 1000.f);
+		m_cball.move(m_speed_cb * 100.f);
 	}
 }
 
@@ -65,7 +69,7 @@ void CBall::MoveCBall()
 
 void CBall::cballUpdate()
 {
-	void MoveCBall();
+	MoveCBall();
 }
 
 void CBall::Render(sf::RenderWindow& l_window)

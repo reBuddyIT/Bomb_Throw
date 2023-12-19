@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "CBall.h"
+#include "Window.h"
 #include "Textbox.h"
 
 enum class Direction {None, Up, Down, Left, Right };
@@ -28,7 +29,7 @@ public:
 
 	void moveShip(); // Movement method.
 	//void MoveCBall();
-	//void Fire(CBall& l_cball, Ship& l_ship);
+	void Fire(CBall& l_cball,std::shared_ptr<sf::RenderWindow>);
 	void shipUpdate(); // Update method.
 	void Render(sf::RenderWindow& l_window);
 private:
@@ -38,7 +39,7 @@ private:
 	Direction m_dir; // Current direction.
 
 	
-	int m_speed; // Speed of the ship.
+	float m_speed; // Speed of the ship.
 	sf::Image m_shipImage;
 	sf::Texture m_shipTexture; // Shape used in rendering.
 	sf::Sprite m_ship;

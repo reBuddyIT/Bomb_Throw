@@ -20,30 +20,30 @@ Window* Game::GetWindow() { return &m_window; }
 void Game::HandleInput()
 {
 	// Input handling.
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && (m_ship.GetDirection() != Direction::Up)
 		&& m_ship.GetDirection() != Direction::Down)
 	{
 		m_ship.SetDirection(Direction::Up);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)
 		&& m_ship.GetDirection() != Direction::Up)
-		 {
-			m_ship.SetDirection(Direction::Down);
-		 }
+	{
+		m_ship.SetDirection(Direction::Down);
+	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)
 		&& m_ship.GetDirection() != Direction::Right)
-		 {
-			m_ship.SetDirection(Direction::Left);
-		 }
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)
-		&& m_ship.GetDirection() != Direction::Left)
-		 {
-			m_ship.SetDirection(Direction::Right);
-		 }
+	{
+		m_ship.SetDirection(Direction::Left);
+	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)
 		&& m_ship.GetDirection() != Direction::Left)
 	{
 		m_ship.SetDirection(Direction::Right);
+	}
+	else if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+
+	{
+		m_ship.Fire(m_cball, m_window.GetRenderWindow());
 	}
 }
 

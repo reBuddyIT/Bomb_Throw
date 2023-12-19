@@ -11,7 +11,7 @@ Ship::Ship(Textbox* l_log)
 	m_ship.setPosition(800, 400);
 	m_ship.setOrigin(l_size.x / 2, l_size.y / 2);
 	m_ship.setRotation(270);
-	m_speed = 10;
+	m_speed = 20.f;
 
 	m_dir = Direction::None;
 	m_lost = false;
@@ -42,7 +42,7 @@ void Ship::Reset()
 	sf::Vector2u l_size = m_shipTexture.getSize();
 	m_ship.setOrigin(l_size.x / 2, l_size.y / 2);
 	m_ship.setRotation(270);
-	
+
 
 	SetDirection(Direction::None); // Start off still.
 	m_score = 0;
@@ -55,28 +55,29 @@ void Ship::ToggleLost() { m_lost = !m_lost; }
 
 void Ship::moveShip()
 {
-	float fElapsed = 1; //m_elapsed.asSeconds();
 
 	if (m_dir == Direction::Left)
 	{
 		m_ship.setRotation(180);
-		m_ship.move({ -(m_speed * fElapsed),  0 });
+		m_ship.move(sf::Vector2f{ -(m_speed),  0.f });
 	}
 	else if (m_dir == Direction::Right)
 	{
 		m_ship.setRotation(0);
-		m_ship.move({ (m_speed * fElapsed),  0 });
+		m_ship.move(sf::Vector2f{ (m_speed),  0.f });
 	}
 	else if (m_dir == Direction::Up)
 	{
 		m_ship.setRotation(-90);
-		m_ship.move({ 0,  -(m_speed * fElapsed) });
+		m_ship.move(sf::Vector2f{ 0.f,  -(m_speed) });
 	}
 	else if (m_dir == Direction::Down)
 	{
 		m_ship.setRotation(90);
-		m_ship.move({ 0,  (m_speed * fElapsed) });
+		m_ship.move(sf::Vector2f{ 0.f,  (m_speed) });
 	}
+
+	SetDirection(Direction::None);
 }
 
 //void MoveCBall()
@@ -94,27 +95,28 @@ void Ship::moveShip()
 //		}
 //}
 
-//void Fire(CBall& l_cball, Ship& l_ship)
-//{
-//	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-//	{
-//		l_cball.setVisible(1);
-//
-//		l_cball.SetPosition(l_ship.GetPosition());
-//
-//		sf::Vector2f ball_trac =
-//			sf::Vector2f(sf::Mouse::getPosition(m_window.GetRenderWindow())) -
-//			l_cball.GetPosition();
-//
-//		float vec_len = sqrt(pow(ball_trac.x, 2) + pow(ball_trac.y, 2));
-//		ball_trac /= vec_len;
-//
-//		if (l_cball.getVisible() == 1)
-//		{
-//			l_cball.MoveCBall();
-//		}
-//	}
-//}
+void Ship::Fire(CBall& l_cball, std::shared_ptr<sf::RenderWindow> m_window)
+{
+
+	l_cball.setVisible(1);
+
+	l_cball.SetPosition(GetPosition());
+
+	sf::Vector2f ball_trac =
+		sf::Vector2f(sf::Mouse::getPosition(*m_window)) -
+		l_cball.GetPosition();
+
+	float vec_len = sqrt(pow(ball_trac.x, 2) + pow(ball_trac.y, 2));
+	ball_trac /= vec_len;
+
+	l_cball.setSpeed(ball_trac);
+
+	if (l_cball.getVisible() == 1)
+	{
+		l_cball.MoveCBall();
+	}
+
+}
 
 void Ship::shipUpdate()
 {
