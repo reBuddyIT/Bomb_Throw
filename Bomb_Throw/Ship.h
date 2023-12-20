@@ -15,11 +15,15 @@ public:
 	// Helper methods.
 	void SetDirection(Direction l_dir);
 	Direction GetDirection();
+	void SetFire(bool fire);
+	bool GetFire();
 	int GetSpeed();
 	int GetScore();
+	void updateAmmo();
 	sf::Vector2f GetPosition();
 	void SetPosition(sf::Vector2f pos_x);
 	void IncreaseScore();
+	void DecreaseScore();
 	bool HasLost();
 
 	void Lose(); // Handle losing here.
@@ -28,17 +32,17 @@ public:
 	void Reset(); // Reset to starting position.
 
 	void moveShip(); // Movement method.
-	//void MoveCBall();
 	void Fire(CBall& l_cball,std::shared_ptr<sf::RenderWindow>);
-	void shipUpdate(); // Update method.
+	void shipUpdate(CBall& l_cball, std::shared_ptr<sf::RenderWindow>); // Update method.
 	void Render(sf::RenderWindow& l_window);
 private:
 
 	int m_score; // Score.
 	bool m_lost; // Losing state.
 	Direction m_dir; // Current direction.
+	bool m_toggleFire;
 
-	
+	int m_ammo;
 	float m_speed; // Speed of the ship.
 	sf::Image m_shipImage;
 	sf::Texture m_shipTexture; // Shape used in rendering.

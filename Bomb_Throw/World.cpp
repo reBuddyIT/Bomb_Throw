@@ -53,37 +53,43 @@ void World::RespawnAShip()
 	float new_y = rand() % int(m_windowSize.y - m_aship.getGlobalBounds().height - m_blockSize) + m_blockSize / 2 + m_aship.getGlobalBounds().height / 2;
 	float new_x = rand() % int(m_windowSize.x - m_aship.getGlobalBounds().width - m_blockSize) + m_blockSize / 2 + m_aship.getGlobalBounds().width / 2;
 
-	std::cout << "POS: " << new_x << " " << new_y << std::endl;
-	std::cout << "SIZE: " << m_aship.getGlobalBounds().width / 2 << " " << m_aship.getGlobalBounds().height / 2 << std::endl;
-
 	m_aship.setPosition(new_x, new_y);
-	/*int maxX = (m_windowSize.x / m_blockSize) - 2;
-	int maxY = (m_windowSize.y / m_blockSize) - 2;
-	m_pos_aship = sf::Vector2f(
-		rand() % maxX + 1, rand() % maxY + 1);
-	m_aship.setPosition(
-		m_pos_aship.x * m_blockSize,
-		m_pos_aship.y * m_blockSize);*/
 }
 
 void World::Update(Ship& l_ship, CBall& l_cball)
 {
+	int gridSize_x = m_windowSize.x;
+	int gridSize_y = m_windowSize.y;
+
 	if ((sqrt(pow(l_ship.GetPosition().x - m_aship.getPosition().x, 2) +
 		pow(l_ship.GetPosition().y - m_aship.getPosition().y, 2)))
-		<= 0.4 * (512 * 0.2 + 512 * 0.3) ||
-		((sqrt(pow(l_cball.GetPosition().x - m_aship.getPosition().x, 2) +
-			pow(l_cball.GetPosition().y - m_aship.getPosition().y, 2)))
-			<= 0.4 * (512 * 0.2 + 512 * 0.3)))
+		<= 0.4 * (512 * 0.2 + 512 * 0.3))
 	{
-		l_cball.setVisible(0);
 		l_ship.IncreaseScore();
-		//std::cout << l_ship.GetScore();
 		RespawnAShip();
 	}
 
-	int gridSize_x = m_windowSize.x;
-	int gridSize_y = m_windowSize.y;
-	
+	else if (((sqrt(pow(l_cball.GetPosition().x - m_aship.getPosition().x, 2) +
+		pow(l_cball.GetPosition().y - m_aship.getPosition().y, 2)))
+		<= 0.4 * (512 * 0.2 + 512 * 0.3)))
+	{
+		l_cball.setVisible(0);
+		l_ship.IncreaseScore();
+		l_ship.updateAmmo();
+		RespawnAShip();
+		/*l_cball.setMiss(0);*/
+	}
+	else if ((l_cball.GetPosition().x <= 0 ||
+		l_cball.GetPosition().y <= 0 ||
+		l_cball.GetPosition().x >= gridSize_x - 1 ||
+		l_cball.GetPosition().y >= gridSize_y - 1) &&
+		l_cball.getVisible())
+	{
+		l_ship.DecreaseScore();
+		l_ship.updateAmmo();
+		l_cball.setVisible(0);
+
+	}
 
 	if (l_ship.GetPosition().x <= 0 ||
 		l_ship.GetPosition().y <= 0 ||
