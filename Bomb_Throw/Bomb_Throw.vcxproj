@@ -129,24 +129,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="CBall.cpp" />
-    <ClCompile Include="Ship.cpp" />
-    <ClCompile Include="Textbox.cpp" />
-    <ClCompile Include="Window.cpp" />
-    <ClCompile Include="World.cpp" />
+    <ClCompile Include="src\CBall.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Ship.cpp" />
+    <ClCompile Include="src\Textbox.cpp" />
+    <ClCompile Include="src\Window.cpp" />
+    <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="CBall.h" />
-    <ClInclude Include="Ship.h" />
-    <ClInclude Include="Textbox.h" />
-    <ClInclude Include="Window.h" />
-    <ClInclude Include="World.h" />
+    <ClInclude Include="src\CBall.h" />
+    <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\Ship.h" />
+    <ClInclude Include="src\Textbox.h" />
+    <ClInclude Include="src\Window.h" />
+    <ClInclude Include="src\World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

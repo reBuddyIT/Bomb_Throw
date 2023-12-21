@@ -37,7 +37,6 @@ private:
 	sf::Vector2f m_fpos;
 	float m_speed;
 	float m_angel;
-	float m_mass;
 	float m_ffall;
 	float m_THdis;
 	Textbox* m_log;

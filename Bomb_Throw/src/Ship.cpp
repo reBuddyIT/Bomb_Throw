@@ -5,14 +5,14 @@ Ship::Ship(Textbox* l_log)
 {
 	m_log = l_log;
 
-	m_shipTexture.loadFromFile("Ship.png");
+	m_shipTexture.loadFromFile("assets/pics/Ship.png");
 	m_ship.setTexture(m_shipTexture);
 	m_ship.setScale(0.3, 0.3);
 	sf::Vector2u l_size = m_shipTexture.getSize();
 	m_ship.setPosition(800, 400);
 	m_ship.setOrigin(l_size.x / 2, l_size.y / 2);
 	m_ship.setRotation(270);
-	m_speed = 15.f;
+	m_speed = 3.f;
 
 	m_dir = Direction::None;
 	m_ammo = 20;
@@ -107,6 +107,7 @@ void Ship::moveShip()
 
 void Ship::Fire(CBall& l_cball, std::shared_ptr<sf::RenderWindow> m_window)
 {
+
 	if (GetFire())
 	{
 		l_cball.SetPosition(GetPosition());
@@ -122,9 +123,9 @@ void Ship::Fire(CBall& l_cball, std::shared_ptr<sf::RenderWindow> m_window)
 
 		l_cball.setSpeed(ball_vec);
 
-		l_cball.setVisible(1);
+	/*	l_cball.setVisible(1);
 
-		if (l_cball.getVisible() == 1)
+		if (l_cball.getVisible() == 1)*/
 		{
 			l_cball.MoveCBall();
 		}

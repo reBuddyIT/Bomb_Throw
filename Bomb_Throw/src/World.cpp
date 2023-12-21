@@ -7,13 +7,13 @@ World::World(sf::Vector2u l_windSize)
 
 	m_windowSize = l_windSize;
 
-	m_bgroundTexture.loadFromFile("ocean.png");
+	m_bgroundTexture.loadFromFile("assets/pics/ocean.png");
 	m_bground.setTexture(m_bgroundTexture);
 	sf::Vector2u l_size = m_bgroundTexture.getSize();
 	m_bground.setPosition(800, 400);
 	m_bground.setOrigin(l_size.x / 2, l_size.y / 2);
 
-	m_ashipTexture.loadFromFile("AShip.png");
+	m_ashipTexture.loadFromFile("assets/pics/AShip.png");
 	m_aship.setTexture(m_ashipTexture);
 	m_aship.setOrigin({ m_aship.getGlobalBounds().width / 2, m_aship.getGlobalBounds().height / 2 });
 	m_aship.setScale(0.25, 0.25);

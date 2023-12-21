@@ -26,7 +26,7 @@ void Game::HandleInput()
 	{
 		m_ship.SetFire(true);
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && (m_ship.GetDirection() != Direction::Up)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)
 		&& m_ship.GetDirection() != Direction::Down)
 	{
 		m_ship.SetDirection(Direction::Up);
@@ -52,7 +52,7 @@ void Game::Update()
 {
 	m_window.Update();
 
-	float timestep = 1.0f / m_ship.GetSpeed();
+	float timestep = 1.0f / 60.0f;
 	if (m_elapsed >= timestep)
 	{
 		m_cball.cballUpdate();
