@@ -5,17 +5,20 @@
 class World
 {
 public:
-	World(sf::Vector2u l_windSize);
+	World(std::shared_ptr<sf::RenderWindow>, Ship& l_ship);
 	~World();
 
+	void SetupBounds();
 	int GetBlockSize();
 
-	void RespawnAShip();
+	void RespawnAShip(Ship& l_ship);
+
+	bool IsShipColl(Ship& l_ship, float offset = 0);
 
 	void Update(Ship& l_ship, CBall& l_cball);
 	void Render(sf::RenderWindow& l_window);
 private:
-	sf::Vector2u m_windowSize;
+	std::shared_ptr<sf::RenderWindow> m_wnd;
 	sf::Vector2f m_pos_aship;
 	int m_blockSize;
 

@@ -25,6 +25,7 @@ Ship::~Ship() {}
 
 void Ship::SetDirection(Direction l_dir) { m_dir = l_dir; }
 Direction Ship::GetDirection() { return m_dir; }
+
 void Ship::SetFire(bool fire) { m_toggleFire = fire; }
 bool Ship::GetFire() { return m_toggleFire; }
 int Ship::GetSpeed() { return m_speed; }
@@ -76,6 +77,11 @@ void Ship::Reset()
 }
 
 bool Ship::HasLost() { return m_lost; }
+sf::Sprite& Ship::GetSprite()
+{
+	return m_ship;
+}
+
 void Ship::Lose() { m_lost = true; }
 void Ship::ToggleLost() { m_lost = !m_lost; }
 
@@ -101,15 +107,15 @@ void Ship::moveShip()
 		m_ship.setRotation(90);
 		m_ship.move(sf::Vector2f{ 0.f,  (m_speed) });
 	}
-
-	SetDirection(Direction::None);
 }
 
 void Ship::Fire(CBall& l_cball, std::shared_ptr<sf::RenderWindow> m_window)
 {
-
 	if (GetFire())
 	{
+
+		l_cball.setVisible(1);
+
 		l_cball.SetPosition(GetPosition());
 
 		sf::Vector2f ball_vec =
@@ -123,16 +129,12 @@ void Ship::Fire(CBall& l_cball, std::shared_ptr<sf::RenderWindow> m_window)
 
 		l_cball.setSpeed(ball_vec);
 
-	/*	l_cball.setVisible(1);
 
-		if (l_cball.getVisible() == 1)*/
+		if (l_cball.getVisible() == 1)
 		{
 			l_cball.MoveCBall();
 		}
-
 	}
-
-	SetFire(0);
 }
 
 void Ship::shipUpdate(CBall& l_cball, std::shared_ptr<sf::RenderWindow> m_window)

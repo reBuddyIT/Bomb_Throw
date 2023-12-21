@@ -1,8 +1,9 @@
 #include "Window.h"
 
 Window::Window(const std::string& title, const sf::Vector2u& size) 
+	:m_IsResized(0)
 {
-	Setup(title, size); 
+	Setup(title, size);
 }
 Window::~Window() { Destroy(); }
 
@@ -37,6 +38,11 @@ void Window::Destroy() { m_window->close(); }
 void Window::BeginDraw() { m_window->clear(sf::Color::Blue); }
 void Window::EndDraw() { m_window->display(); }
 
+bool Window::IswndResized()
+{
+	return m_IsResized;
+}
+
 bool Window::IsDone() { return m_isDone; }
 bool Window::IsFullscreen() { return m_isFullscreen; }
 
@@ -58,5 +64,16 @@ void Window::Update()
 	{
 		if (event.type == sf::Event::Closed) { m_isDone = true; }
 		else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F5) { ToggleFullscreen(); }
+		else if (event.type == sf::Event::Resized)
+		{
+			sf::FloatRect visArea(0, 0, m_window->getSize().x, m_window->getSize().y);
+			m_window->setView(sf::View(visArea));
+			m_IsResized = 1;
+
+		}
+		else
+		{
+			m_IsResized = 0;
+		}
 	}
 }

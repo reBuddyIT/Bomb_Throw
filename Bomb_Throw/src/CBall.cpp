@@ -12,10 +12,10 @@ CBall::CBall(Textbox* l_log)
 	m_cball.setPosition(800, 400);
 
 	m_angel = 45;
-	m_speed = 20;
-	m_ffall = 10;
+	m_speed = 10;
+	m_ffall = 1;
 
-	m_THdis = ((2 * pow((m_speed * 60), 2) * sin(m_angel) * cos(m_angel)) / m_ffall);
+	m_THdis = ((2 * pow((m_speed * 100), 2) * sin(m_angel) * cos(m_angel)) / m_ffall);
 }
 
 CBall::~CBall() {}
@@ -58,14 +58,11 @@ void CBall::Reset()
 {
 	m_IsCBallVisible = 0;
 	m_cball.setPosition(800, 400);
-
 }
 
 void CBall::MoveCBall()
 {
-	setVisible(1);
-
-	//if (m_IsCBallVisible)
+	if (m_IsCBallVisible)
 	{
 		m_cball.move(m_speed_cb * m_speed);
 	}

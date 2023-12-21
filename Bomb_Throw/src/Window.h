@@ -17,6 +17,7 @@ public:
 
 	void Update();
 
+	bool IswndResized();
 	bool IsDone();
 	bool IsFullscreen();
 	sf::Vector2u GetWindowSize();
@@ -34,4 +35,5 @@ private:
 	std::string m_windowTitle;
 	bool m_isDone;
 	bool m_isFullscreen;
+	bool m_IsResized;
 };
