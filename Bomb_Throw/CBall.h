@@ -24,14 +24,15 @@ public:
 	//void Reset(); // Reset to starting position.
 
 	void MoveCBall();
-
+	void Reset(); // Reset to starting position.
 	void cballUpdate(); // Update method.
 	void Render(sf::RenderWindow& l_window);
 private:
 	bool m_IsCBallVisible;
 
-	bool m_miss;
-	sf::CircleShape m_cball;
+	//sf::CircleShape m_cball;
+	sf::Texture m_cballTexture; // Shape used in rendering.
+	sf::Sprite m_cball;
 	sf::Vector2f m_speed_cb;
 	sf::Vector2f m_fpos;
 	float m_speed;

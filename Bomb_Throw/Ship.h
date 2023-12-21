@@ -44,7 +44,7 @@ private:
 
 	int m_ammo;
 	float m_speed; // Speed of the ship.
-	sf::Image m_shipImage;
+	//sf::Image m_shipImage;
 	sf::Texture m_shipTexture; // Shape used in rendering.
 	sf::Sprite m_ship;
 	Textbox* m_log;

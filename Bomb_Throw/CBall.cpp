@@ -5,11 +5,11 @@ CBall::CBall(Textbox* l_log)
 	m_log = l_log;
 
 	m_IsCBallVisible = 0;
-	m_cball.setRadius(10);
-	m_cball.setFillColor(sf::Color::Black);
+	m_cballTexture.loadFromFile("assets/CBall.png");
+	m_cball.setTexture(m_cballTexture);
+	m_cball.setOrigin({ m_cball.getGlobalBounds().width / 2, m_cball.getGlobalBounds().height / 2 });
+	m_cball.setScale(0.1, 0.1);
 	m_cball.setPosition(800, 400);
-
-	m_speed_cb = sf::Vector2f(100, 100);
 
 	m_angel = 60;
 	m_speed = 100;
@@ -52,11 +52,17 @@ void CBall::displayStats()
 		+ std::to_string((long long)m_THdis));
 }
 
-//int CBall::GetSpeed() { return m_speed_cb; }
 sf::Vector2f CBall::GetPosition() { return m_cball.getPosition(); }
 void CBall::SetPosition(sf::Vector2f pos)
 {
 	m_cball.setPosition(pos);
+}
+
+void CBall::Reset()
+{
+	m_IsCBallVisible = 0;
+	m_cball.setPosition(800, 400);
+
 }
 
 void CBall::MoveCBall()

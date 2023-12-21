@@ -76,23 +76,27 @@ void World::Update(Ship& l_ship, CBall& l_cball)
 		pow(l_cball.GetPosition().y - m_aship.getPosition().y, 2)))
 		<= 0.8 * (512 * 0.25 + 10)) && l_cball.getVisible())
 	{
-		l_cball.setVisible(0);
+		l_cball.Reset();
 		l_ship.IncreaseScore();
 		l_ship.updateAmmo();
 		RespawnAShip();
 	}
 	else if ((l_cball.getDis() < sqrt(pow(l_cball.GetPosition().x - l_cball.GetFpos().x, 2)
-		+ pow(l_cball.GetPosition().y - l_cball.GetFpos().y, 2)))
-		/*(l_cball.GetPosition().x <= 0 ||
-		l_cball.GetPosition().y <= 0 ||
-		l_cball.GetPosition().x >= gridSize_x - 1 ||
-		l_cball.GetPosition().y >= gridSize_y - 1)*/ &&
-		l_cball.getVisible())
+		+ pow(l_cball.GetPosition().y - l_cball.GetFpos().y, 2))) && l_cball.getVisible())
 	{
-		l_cball.setVisible(0);
+		l_cball.Reset();
 		l_ship.DecreaseScore();
 		l_ship.updateAmmo();
 	}
+	else if ((l_cball.GetPosition().x <= 0 ||
+		l_cball.GetPosition().y <= 0 ||
+		l_cball.GetPosition().x >= gridSize_x - 1 ||
+		l_cball.GetPosition().y >= gridSize_y - 1))
+	{
+		l_cball.Reset();
+		l_ship.DecreaseScore();
+		l_ship.updateAmmo();
+	}	
 
 	if (l_ship.GetPosition().x <= 0 ||
 		l_ship.GetPosition().y <= 0 ||

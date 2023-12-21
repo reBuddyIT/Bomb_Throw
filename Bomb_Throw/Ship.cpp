@@ -68,12 +68,11 @@ void Ship::Reset()
 	m_ship.setOrigin(l_size.x / 2, l_size.y / 2);
 	m_ship.setRotation(270);
 
-
 	m_dir = Direction::None;
 	m_ammo = 20;
 	m_toggleFire = 0;
-	m_lost = false;
 	m_score = 0;
+	m_lost = false;
 }
 
 bool Ship::HasLost() { return m_lost; }
