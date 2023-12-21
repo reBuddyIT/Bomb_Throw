@@ -15,7 +15,7 @@ void Textbox::Setup(int l_visible, int l_charSize,
 {
 	m_numVisible = l_visible;
 
-	sf::Vector2f l_offset(2.0f, 2.0f);
+	sf::Vector2f l_offset(10.0f, 2.0f);
 
 	m_font.loadFromFile("arial.ttf");
 	m_content.setFont(m_font);
@@ -30,10 +30,10 @@ void Textbox::Setup(int l_visible, int l_charSize,
 	m_backdrop.setPosition(l_screenPos);
 }
 
-void Textbox::Add(std::string l_message)
+void Textbox::Add(std::string l_message, int max_size)
 {
 	m_messages.push_back(l_message);
-	if (m_messages.size() < 6) { return; }
+	if (m_messages.size() < max_size) { return; }
 	m_messages.erase(m_messages.begin());
 }
 

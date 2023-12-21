@@ -38,14 +38,14 @@ void Ship::IncreaseScore()
 {
 	m_score += 1;
 	m_log->Add("You destroyed a ship! Score: "
-		+ std::to_string((long long)m_score));
+		+ std::to_string((long long)m_score), 3);
 }
 
 void Ship::DecreaseScore()
 {
 	m_score -= 1;
 	m_log->Add("You missed! Score: "
-		+ std::to_string((long long)m_score));
+		+ std::to_string((long long)m_score), 3);
 }
 
 void Ship::updateAmmo()
@@ -53,7 +53,7 @@ void Ship::updateAmmo()
 	m_ammo -= 1;
 	m_log->Add("You have: "
 		+ std::to_string((long long)m_ammo)
-	+ " cannon balls left!");
+	+ " cannon balls left!", 3);
 
 	if (m_ammo == 0)
 	{
@@ -81,7 +81,6 @@ void Ship::ToggleLost() { m_lost = !m_lost; }
 
 void Ship::moveShip()
 {
-
 	if (m_dir == Direction::Left)
 	{
 		m_ship.setRotation(180);

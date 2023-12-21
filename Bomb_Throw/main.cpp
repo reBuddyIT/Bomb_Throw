@@ -2,11 +2,10 @@
 
 int main(int argc, void** argv[])
 {
-
 	Game game;
 	while (!game.GetWindow()->IsDone())
 	{
-		// основной цикл
+		// основной цикл игры
 		game.HandleInput();
 		game.Update();
 		game.Render();

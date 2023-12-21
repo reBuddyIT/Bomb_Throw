@@ -7,8 +7,8 @@ Game::Game()
 	RestartClock();
 	srand(time(NULL));
 
-	m_textbox1.Setup(5, 18, 350, sf::Vector2f(625, 8));
-	m_textbox2.Setup(5, 16, 178, sf::Vector2f(8, 8));
+	m_textbox1.Setup(3, 18, 270, sf::Vector2f(665, 8));
+	m_textbox2.Setup(5, 16, 270, sf::Vector2f(8, 8));
 	m_elapsed = 0.0f;
 }
 
@@ -63,7 +63,7 @@ void Game::Update()
 		{
 			m_textbox1.Clear();
 			m_textbox1.Add("GAME OVER! Score: "
-				+ std::to_string((long long)m_ship.GetScore()));
+				+ std::to_string((long long)m_ship.GetScore()), 3);
 
 			m_ship.Reset();
 		}

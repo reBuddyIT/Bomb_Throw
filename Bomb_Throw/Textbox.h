@@ -15,7 +15,7 @@ public:
 
 	void Setup(int l_visible, int l_charSize,
 		int l_width, sf::Vector2f l_screenPos);
-	void Add(std::string l_message);
+	void Add(std::string l_message, int max_size);
 	void Clear();
 
 	void Render(sf::RenderWindow& l_wind);

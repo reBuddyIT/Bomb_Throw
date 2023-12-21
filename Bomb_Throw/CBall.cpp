@@ -5,10 +5,10 @@ CBall::CBall(Textbox* l_log)
 	m_log = l_log;
 
 	m_IsCBallVisible = 0;
-	m_cballTexture.loadFromFile("assets/CBall.png");
+	m_cballTexture.loadFromFile("CBall.png");
 	m_cball.setTexture(m_cballTexture);
 	m_cball.setOrigin({ m_cball.getGlobalBounds().width / 2, m_cball.getGlobalBounds().height / 2 });
-	m_cball.setScale(0.1, 0.1);
+	m_cball.setScale(0.06, 0.06);
 	m_cball.setPosition(800, 400);
 
 	m_angel = 60;
@@ -37,19 +37,19 @@ void CBall::SetFpos(sf::Vector2f f_pos) { m_fpos = f_pos; }
 void CBall::displayStats()
 {
 	m_log->Add("Throwing angel: "
-		+ std::to_string((long long)m_angel));
+		+ std::to_string((long long)m_angel), 6);
 
 	m_log->Add("Starting cannon ball speed: "
-		+ std::to_string((long long)m_speed));
+		+ std::to_string((long long)m_speed), 6);
 
 	m_log->Add("Cannon ball mass: "
-		+ std::to_string((long long)m_mass));
+		+ std::to_string((long long)m_mass), 6);
 
 	m_log->Add("Free fall: "
-		+ std::to_string((long long)m_ffall));
+		+ std::to_string((long long)m_ffall), 6);
 
 	m_log->Add("Expected throwing distance: "
-		+ std::to_string((long long)m_THdis));
+		+ std::to_string((long long)m_THdis), 6);
 }
 
 sf::Vector2f CBall::GetPosition() { return m_cball.getPosition(); }
