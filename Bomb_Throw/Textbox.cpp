@@ -33,7 +33,7 @@ void Textbox::Setup(int l_visible, int l_charSize,
 void Textbox::Add(std::string l_message)
 {
 	m_messages.push_back(l_message);
-	if (m_messages.size() < 4) { return; }
+	if (m_messages.size() < 6) { return; }
 	m_messages.erase(m_messages.begin());
 }
 

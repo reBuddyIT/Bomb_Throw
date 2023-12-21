@@ -15,7 +15,7 @@ Ship::Ship(Textbox* l_log)
 	m_speed = 15.f;
 
 	m_dir = Direction::None;
-	m_ammo = 10;
+	m_ammo = 20;
 	m_toggleFire = 0;
 	m_lost = false;
 	m_score = 0;
@@ -70,7 +70,7 @@ void Ship::Reset()
 
 
 	m_dir = Direction::None;
-	m_ammo = 10;
+	m_ammo = 20;
 	m_toggleFire = 0;
 	m_lost = false;
 	m_score = 0;
@@ -111,18 +111,20 @@ void Ship::Fire(CBall& l_cball, std::shared_ptr<sf::RenderWindow> m_window)
 {
 	if (GetFire())
 	{
-		l_cball.setVisible(1);
-
 		l_cball.SetPosition(GetPosition());
 
-		sf::Vector2f ball_trac =
+		sf::Vector2f ball_vec =
 			sf::Vector2f(sf::Mouse::getPosition(*m_window)) -
 			l_cball.GetPosition();
 
-		float vec_len = sqrt(pow(ball_trac.x, 2) + pow(ball_trac.y, 2));
-		ball_trac /= vec_len;
+		l_cball.SetFpos(GetPosition());
 
-		l_cball.setSpeed(ball_trac);
+		float vec_len = sqrt(pow(ball_vec.x, 2) + pow(ball_vec.y, 2));
+		ball_vec /= vec_len;
+
+		l_cball.setSpeed(ball_vec);
+
+		l_cball.setVisible(1);
 
 		if (l_cball.getVisible() == 1)
 		{

@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <cmath>
 #include "Textbox.h"
 
 class CBall
@@ -13,9 +14,12 @@ public:
 	void setSpeed(sf::Vector2f speed);
 	bool getVisible();
 	void setVisible(bool visib);
+	float getDis();
 	void displayStats();
 	sf::Vector2f GetPosition();
-	void SetPosition(sf::Vector2f pos_x);
+	sf::Vector2f GetFpos();
+	void SetFpos(sf::Vector2f f_pos);
+	void SetPosition(sf::Vector2f pos);
 
 	//void Reset(); // Reset to starting position.
 
@@ -29,8 +33,11 @@ private:
 	bool m_miss;
 	sf::CircleShape m_cball;
 	sf::Vector2f m_speed_cb;
+	sf::Vector2f m_fpos;
 	float m_speed;
 	float m_angel;
 	float m_mass;
+	float m_ffall;
+	float m_THdis;
 	Textbox* m_log;
 };
