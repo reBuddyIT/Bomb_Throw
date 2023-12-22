@@ -18,6 +18,10 @@ public:
 
 	// проверка столкновения кораблей
 	bool IsShipColl(Ship& l_ship, float offset = 0);
+	// проверка столкновения ядра
+	bool IsCBallColl(CBall& l_cball);
+	// проверка промаха(недолёт)
+	bool IsCBallMiss(CBall& l_cball);
 
 	// обновление объектов(проверка взаимодействия)
 	void Update(Ship& l_ship, CBall& l_cball);

@@ -87,21 +87,14 @@ void World::Update(Ship& l_ship, CBall& l_cball)
 	int gridSize_x = m_wnd->getSize().x;
 	int gridSize_y = m_wnd->getSize().y;
 
-	/*if ((sqrt(pow(l_ship.GetPosition().x - m_aship.getPosition().x, 2) +
-		pow(l_ship.GetPosition().y - m_aship.getPosition().y, 2)))
-		<= 0.4 * (512 * 0.25 + 512 * 0.3))*/
-		// при столкновении кораблей
+	// при столкновении кораблей
 	if(IsShipColl(l_ship))
 	{
-		/*l_ship.IncreaseScore();
-		RespawnAShip(l_ship);*/
 		// пройгрыш
 		l_ship.Lose();
 	}
 	// при попадании
-	else if (((sqrt(pow(l_cball.GetPosition().x - m_aship.getPosition().x, 2) +
-		pow(l_cball.GetPosition().y - m_aship.getPosition().y, 2)))
-		<= 0.6 * (512 * 0.25 + 10)) && l_cball.getVisible())
+	else if (IsCBallColl(l_cball))
 	{
 		// обновление параметров
 		l_cball.Reset();
@@ -113,8 +106,7 @@ void World::Update(Ship& l_ship, CBall& l_cball)
 		RespawnAShip(l_ship);
 	}
 	// при промахе
-	else if ((l_cball.getDist() < sqrt(pow(l_cball.GetPosition().x - l_cball.GetFpos().x, 2)
-		+ pow(l_cball.GetPosition().y - l_cball.GetFpos().y, 2))) && l_cball.getVisible())
+	else if (IsCBallMiss(l_cball))
 	{
 		// обновление параметров
 		l_cball.Reset();
@@ -153,6 +145,19 @@ bool World::IsShipColl(Ship& l_ship, float offset)
 	return ((sqrt(pow(l_ship.GetPosition().x - m_aship.getPosition().x, 2) +
 		pow(l_ship.GetPosition().y - m_aship.getPosition().y, 2)))
 		<= 0.4 * ((512 + offset) * 0.25 + (512 + offset) * 0.3));
+}
+// проверка столкновения ядра
+bool World::IsCBallColl(CBall& l_cball)
+{
+	return (((sqrt(pow(l_cball.GetPosition().x - m_aship.getPosition().x, 2) +
+		pow(l_cball.GetPosition().y - m_aship.getPosition().y, 2)))
+		<= 0.6 * (512 * 0.25 + 10)) && l_cball.getVisible());
+}
+// проверка промаха(недолёт)
+bool World::IsCBallMiss(CBall& l_cball)
+{
+	return ((l_cball.getDist() < sqrt(pow(l_cball.GetPosition().x - l_cball.GetFpos().x, 2)
+		+ pow(l_cball.GetPosition().y - l_cball.GetFpos().y, 2))) && l_cball.getVisible());
 }
 
 // отображение объектов
