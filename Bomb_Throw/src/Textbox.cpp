@@ -10,48 +10,55 @@ Textbox::Textbox(int l_visible, int l_charSize,
 
 Textbox::~Textbox() { Clear(); }
 
+// установка координат
 void Textbox::SetPos(sf::Vector2f pos)
 {
 	m_content.setPosition(pos + m_offset);
 	m_backdrop.setPosition(pos);
 }
-
+// получение размеров
 sf::Vector2f Textbox::GetSize()
 {
 	return m_backdrop.getSize();
 }
 
+// установка параметров
 void Textbox::Setup(int l_visible, int l_charSize,
 	int l_width, sf::Vector2f l_screenPos)
 {
+	// количество видимых
 	m_numVisible = l_visible;
-
+	// смещение
 	m_offset = { 10.0f, 2.0f };
-	//sf::Vector2f l_offset(10.0f, 2.0f);
 
+	// загрузка шрифтов
 	m_font.loadFromFile("assets/fonts/arial.ttf");
+	// установка положения для текта
 	m_content.setOrigin(0, 0);
 	m_content.setFont(m_font);
 	m_content.setString("");
 	m_content.setCharacterSize(l_charSize);
 	m_content.setFillColor(sf::Color::White);
 
+	// установка положения для окна
 	m_backdrop.setOrigin(0, 0);
 	m_backdrop.setSize(sf::Vector2f(
 		l_width, (l_visible * (l_charSize * 1.2f))));
 	m_backdrop.setFillColor(sf::Color(90, 90, 90, 90));
 	SetPos(l_screenPos);
 }
-
+// добавление строчки
 void Textbox::Add(std::string l_message, int max_size)
 {
 	m_messages.push_back(l_message);
+	// если количесво больше допустимого
 	if (m_messages.size() < max_size) { return; }
 	m_messages.erase(m_messages.begin());
 }
-
+// очистка текст бокса
 void Textbox::Clear() { m_messages.clear(); }
 
+// отображение текстового окна
 void Textbox::Render(sf::RenderWindow& l_wind)
 {
 	std::string l_content;
