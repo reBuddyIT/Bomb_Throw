@@ -79,7 +79,6 @@ void World::RespawnAShip(Ship& l_ship)
 
 		// условие столкновения кораблей + смещение
 	} while (IsShipColl(l_ship, 1000));
-	std::cout << std::endl;
 }
 // обновление объектов(проверка взаимодействия)
 void World::Update(Ship& l_ship, CBall& l_cball)
@@ -102,7 +101,7 @@ void World::Update(Ship& l_ship, CBall& l_cball)
 	// при попадании
 	else if (((sqrt(pow(l_cball.GetPosition().x - m_aship.getPosition().x, 2) +
 		pow(l_cball.GetPosition().y - m_aship.getPosition().y, 2)))
-		<= 0.8 * (512 * 0.25 + 10)) && l_cball.getVisible())
+		<= 0.6 * (512 * 0.25 + 10)) && l_cball.getVisible())
 	{
 		// обновление параметров
 		l_cball.Reset();

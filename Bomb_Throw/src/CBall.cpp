@@ -18,10 +18,10 @@ CBall::CBall(Textbox* l_log)
 	// физические параметры
 	m_angel = 45;
 	m_speed = 10;
-	m_ffall = 1;
+	m_ffall = 0.12;
 
 	// расчёт дальности полёта
-	m_THdis = ((2 * pow((m_speed * 100), 2) * sin(m_angel) * cos(m_angel)) / m_ffall);
+	m_THdis = ((2 * pow((m_speed), 2) * sin(m_angel) * cos(m_angel)) / m_ffall);
 }
 
 CBall::~CBall() {}
@@ -44,7 +44,7 @@ void CBall::displayStats()
 		+ std::to_string((long long)m_speed), 5);
 
 	m_log->Add("Free fall: "
-		+ std::to_string((long long)m_ffall), 5);
+		+ std::to_string(m_ffall), 5);
 
 	m_log->Add("Expected throwing distance: "
 		+ std::to_string((long long)m_THdis), 5);

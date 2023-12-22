@@ -75,8 +75,6 @@ void Window::Update()
 	{
 		// закрытие окна
 		if (event.type == sf::Event::Closed) { m_isDone = true; }
-		// полный экран
-		else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F5) { ToggleFullscreen(); }
 		// изменение размеров объектов
 		else if (event.type == sf::Event::Resized)
 		{
